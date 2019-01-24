@@ -1,0 +1,56 @@
+version: "3"
+
+services:
+
+  # PostgresSQL database
+  postgresdb:
+    image: postgres:11.1
+    container_name: postgresdb
+    ports:
+      - "5432:5432"
+    command: postgres -c max_prepared_transactions=100
+    volumes:
+      - dbvolume:/var/lib/postgresql/data
+      - ./src/main/docker/db/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+    environment:
+      POSTGRES_PASSWORD: p6
+    networks:
+      - p6
+
+  # Docker image for the P6
+  p6-example-process:
+    container_name: p6-example-process
+    image: lorislab/p6-example-process
+    environment:
+        DB_URL: jdbc:postgresql://postgresdb:5432/p6
+        DB_USER: p6
+        DB_PWD: p6
+        DEBUG: "true"
+        DEBUG_PORT: "*:8787"
+    restart: on-failure
+    ports: 
+        - "8080:8080"
+        - "8787:8787"
+    networks:
+     - p6
+
+  # PostgresqSQL administrator
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: p6@lorislab.org
+      PGADMIN_DEFAULT_PASSWORD: p6
+    ports:
+        - "8090:80"
+    volumes:
+        - pgvolume:/var/lib/pgadmin
+    networks:
+     - p6
+        
+volumes:
+  dbvolume: null
+  pgvolume: null
+  
+networks:
+    p6:
