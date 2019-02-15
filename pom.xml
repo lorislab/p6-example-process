@@ -207,4 +207,43 @@
         </snapshotRepository>
     </distributionManagement>
 
+    <!-- TODO REMOVE THIS AFTER MIGRATION TO MAVEN CENTRAL REPOSITORY -->
+    <repositories>
+        <repository>
+            <id>oss</id>
+            <url>http://oss.jfrog.org/artifactory/oss-snapshot-local</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>lorislab-repo</id>
+            <url>http://dl.bintray.com/lorislab/maven</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>lorislab-plugins</id>
+            <url>http://dl.bintray.com/lorislab/maven</url>
+            <layout>default</layout>
+            <releases>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
