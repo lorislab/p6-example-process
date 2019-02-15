@@ -48,7 +48,7 @@
         <dependency>
             <groupId>org.lorislab.p6</groupId>
             <artifactId>p6-client</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -60,6 +60,44 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.lorislab.p6</groupId>
+                <artifactId>p6-maven-plugin</artifactId>
+                <version>1.0.1</version>
+                <executions>
+                    <execution>
+                        <id>bpmnio</id>
+                        <goals>
+                            <goal>bpmn2</goal>
+                        </goals>
+                        <configuration>
+                            <source>${project.basedir}/src/main/resources/bpmn2/bpmnio/</source>
+                            <target>${project.build.outputDirectory}/bpmn2/bpmnio/</target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>ea</id>
+                        <goals>
+                            <goal>bpmn2</goal>
+                        </goals>
+                        <configuration>
+                            <filePattern>*.xml</filePattern>
+                            <source>${project.basedir}/src/main/resources/bpmn2/ea/</source>
+                            <target>${project.build.outputDirectory}/bpmn2/ea/</target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>jbpm</id>
+                        <goals>
+                            <goal>bpmn2</goal>
+                        </goals>
+                        <configuration>
+                            <source>${project.basedir}/src/main/resources/bpmn2/jbpm/</source>
+                            <target>${project.build.outputDirectory}/bpmn2/jbpm/</target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
@@ -160,7 +198,7 @@
         <repository>
             <id>bintray</id>
             <name>Release</name>
-            <url>https://api.bintray.com/maven/lorislab/maven/p6/;publish=1</url>
+            <url>https://api.bintray.com/maven/lorislab/maven/p6-example-process/;publish=1</url>
         </repository>
         <snapshotRepository>
             <id>bintray</id>

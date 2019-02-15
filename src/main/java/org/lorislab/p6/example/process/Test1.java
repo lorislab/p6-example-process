@@ -21,6 +21,8 @@ import org.lorislab.p6.annotations.ServiceTask;
 import org.lorislab.p6.annotations.WorkflowProcess;
 import org.lorislab.p6.client.service.ServiceTaskItem;
 
+import javax.xml.namespace.QName;
+
 @Slf4j
 @WorkflowProcess(processId = "org.lorislab.p6.example.Test1", processVersion = "1.0.0")
 public class Test1 {
